@@ -1,5 +1,5 @@
 .recipe-image {
     width: 100%; /* Makes the image responsive */
-    height: 40px; /* Fixed height */
+    height: 100px; /* Fixed height */
     object-fit: cover; /* Ensures the image covers the area without stretching */
 }
