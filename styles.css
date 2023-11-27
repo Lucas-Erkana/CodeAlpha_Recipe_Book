@@ -3,3 +3,18 @@
     height: 100px; /* Fixed height */
     object-fit: cover; /* Ensures the image covers the area without stretching */
 }
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-nav-container {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    align-items: center;
+}
+
+.navbar-nav-container .nav-item:last-child {
+    justify-self: end;
+}
