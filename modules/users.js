@@ -1,5 +1,3 @@
-const apiUrl = 'https://rich-bat-bathing-suit.cyclic.app/';
-
 document.getElementById('signupForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
@@ -8,23 +6,6 @@ document.getElementById('signupForm').addEventListener('submit', async function(
     const email = document.getElementById('newEmail').value;
     const password = document.getElementById('newPassword').value;
     const role = "user";
-
-    //validating form
-    function validateForm(email, password) {
-        let valid = true;
-    
-        if (!email.includes('@')) {
-            showError('emailError', 'Invalid email');
-            valid = false;
-        }
-        if (password.length < 7) {
-            showError('passwordError', 'Password must be at least 7 characters');
-            valid = false;
-        }
-    
-        return valid;
-    }
-    
 
     // Validate data
     if (!validateForm(email, password)) {
@@ -40,28 +21,25 @@ document.getElementById('signupForm').addEventListener('submit', async function(
             },
             body: JSON.stringify({ "username":username, "email": email, "role":role, "password":password })
         });
-    
+
         if (!response.ok) {
             throw new Error('Network response was not ok: ' + response.statusText);
         }
-    
-        // Handling response as text
-        const data = await response.text();
-        console.log("Response received: ", data);
+
+        const data = await response.json();
+        console.log(data);
         
         // Hide signup form and show success message
-        hideElement('signUpCard');
-        hideElement ('signInCard')                                                        
+        hideElement('signupForm');
         showSuccessMessage(email);
         setTimeout(() => {
             hideElement('successMessage');
-            showElement('signInCard');
+            showElement('loginMenu');
         }, 3000);
-    
+
     } catch (error) {
         console.error('Error:', error);
     }
-    
 });
 
 function showSuccessMessage(email) {
