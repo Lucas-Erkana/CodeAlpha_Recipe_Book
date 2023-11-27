@@ -1,59 +1,65 @@
-document.getElementById('signupForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
+// users.js
+const apiUrl = 'https://rich-bat-bathing-suit.cyclic.app/';
 
-    // Fetch values
-    const username = document.getElementById('newUsername').value;
-    const email = document.getElementById('newEmail').value;
-    const password = document.getElementById('newPassword').value;
-    const role = "user";
+document.addEventListener('DOMContentLoaded', () => {
+    fetchUsers();
+});
 
-    // Validate data
-    if (!validateForm(email, password)) {
-        return; // Stop the function if validation fails
-    }
-
+async function fetchUsers() {
     try {
-        // Post data
-        const response = await fetch(apiUrl + 'users', {
-            method: 'POST',
+        const response = await fetch(apiUrl + 'users');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const users = await response.json();
+        displayUsers(users);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+function displayUsers(users) {
+    const usersList = document.getElementById('usersList');
+    usersList.innerHTML = '';
+
+    users.forEach(user => {
+        const userItem = document.createElement('tr');
+        userItem.innerHTML = `
+            <td>${user.email}</td>
+            <td>${user.role}</td>
+            <td>
+                <button class="btn btn-primary btn-sm" onclick="editUser('${user._id}')">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteUser('${user._id}')">Delete</button>
+            </td>
+        `;
+        usersList.appendChild(userItem);
+    });
+}
+
+function editUser(userId) {
+    // Add logic to edit user
+    console.log('Edit user with ID:', userId);
+    // Change button to 'Save' and disable 'Delete' button
+}
+
+async function deleteUser(userId) {
+    try {
+        const response = await fetch(apiUrl + 'users/' + userId, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ "username":username, "email": email, "role":role, "password":password })
+                // Add any necessary headers such as authentication tokens here
+            }
         });
 
         if (!response.ok) {
             throw new Error('Network response was not ok: ' + response.statusText);
         }
 
-        const data = await response.json();
-        console.log(data);
-        
-        // Hide signup form and show success message
-        hideElement('signupForm');
-        showSuccessMessage(email);
-        setTimeout(() => {
-            hideElement('successMessage');
-            showElement('loginMenu');
-        }, 3000);
-
+        console.log('User deleted with ID:', userId);
+        fetchUsers(); // Refresh the list of users after deletion
     } catch (error) {
         console.error('Error:', error);
     }
-});
-
-function showSuccessMessage(email) {
-    const messageElement = document.getElementById('successMessage');
-    messageElement.textContent = `User saved with email: ${email}`;
-    messageElement.style.display = 'block';
 }
 
-function hideElement(elementId) {
-    const element = document.getElementById(elementId);
-    element.style.display = 'none';
-}
-
-function showElement(elementId) {
-    const element = document.getElementById(elementId);
-    element.style.display = 'block';
-}
