@@ -1,5 +1,5 @@
 // users.js
-const apiUrl = 'https://rich-bat-bathing-suit.cyclic.app/';
+const apiUrl = 'https://busy-erin-sneakers.cyclic.app/';
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchUsers();

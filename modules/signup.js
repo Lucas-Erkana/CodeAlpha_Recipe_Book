@@ -1,4 +1,4 @@
-const apiUrl = 'https://rich-bat-bathing-suit.cyclic.app/';
+const apiUrl = 'https://busy-erin-sneakers.cyclic.app/';
 
 document.getElementById('signupForm').addEventListener('submit', async function(event) {
     event.preventDefault();

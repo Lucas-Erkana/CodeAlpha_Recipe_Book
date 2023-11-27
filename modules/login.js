@@ -1,10 +1,15 @@
 // login.js
 
-const apiUrl = 'https://rich-bat-bathing-suit.cyclic.app/';
+const apiUrl = 'https://busy-erin-sneakers.cyclic.app/';
 
 document.addEventListener('DOMContentLoaded', () => {
     const signInForm = document.getElementById('signinForm');
     signInForm.addEventListener('submit', handleSignIn);
+
+    const logoutButton = document.querySelector('#logoutButton'); // Ensure this selector matches your logout button's ID or class
+    if (logoutButton) {
+        logoutButton.addEventListener('click', handleLogout);
+    }
 });
 
 async function handleSignIn(event) {
@@ -14,12 +19,12 @@ async function handleSignIn(event) {
     const password = document.getElementById('password').value;
 
     try {
-        const response = await authenticateUser(username, password);
-        if (response.success) {
-            localStorage.setItem('username', response.username);
+        const user = await authenticateUser(username, password);
+        if (user) {
+            localStorage.setItem('username', user.username);
             displayNavigationAndRecipe();
             document.querySelector('.login').style.display = 'none';
-            updateNavBarWithUsername(response.username);
+            updateNavBarWithUsername(user.username);
         } else {
             displayErrorMessage('Invalid username or password.');
         }
@@ -30,21 +35,14 @@ async function handleSignIn(event) {
 
 async function authenticateUser(username, password) {
     try {
-        const response = await fetch(apiUrl + 'users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ "username":username,"password":password  })
-        });
-
+        const response = await fetch(apiUrl + 'users');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-
-        return await response.json();
+        const users = await response.json();
+        return users.find(user => user.username === username && user.password === password);
     } catch (error) {
-        console.error('Error during authentication:', error);
+        console.error('Error during fetching users:', error);
         throw error;
     }
 }
@@ -56,7 +54,16 @@ function displayNavigationAndRecipe() {
 
 function updateNavBarWithUsername(username) {
     const logoutNavItem = document.querySelector('.navbar-nav').lastElementChild;
+
+    // Remove existing username element if present
+    const existingUsernameElement = logoutNavItem.querySelector('.username');
+    if (existingUsernameElement) {
+        logoutNavItem.removeChild(existingUsernameElement);
+    }
+
+    // Add new username element
     const usernameElement = document.createElement('span');
+    usernameElement.className = 'username'; // Add a class for easy identification
     usernameElement.textContent = username;
     logoutNavItem.insertBefore(usernameElement, logoutNavItem.firstChild);
 }
@@ -65,4 +72,22 @@ function displayErrorMessage(message) {
     const errorMessageElement = document.getElementById('successMessage');
     errorMessageElement.textContent = message;
     errorMessageElement.style.display = 'block';
+}
+function handleLogout() {
+    // Clear local storage
+    localStorage.removeItem('username');
+
+    // Remove username from nav bar
+    const logoutNavItem = document.querySelector('.navbar-nav').lastElementChild;
+    const existingUsernameElement = logoutNavItem.querySelector('.username');
+    if (existingUsernameElement) {
+        logoutNavItem.removeChild(existingUsernameElement);
+    }
+
+    // Hide navigation and recipe sections
+    document.querySelector('nav').style.display = 'none';
+    document.querySelector('.Recipe').style.display = 'none';
+
+    // Display the login section
+    document.querySelector('.login').style.display = 'block';
 }
