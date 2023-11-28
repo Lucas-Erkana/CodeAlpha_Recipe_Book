@@ -18,3 +18,23 @@ body {
 .navbar-nav-container .nav-item:last-child {
     justify-self: end;
 }
+
+input.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 5px #719ECE; /* This creates a blue glow around the input field */
+    border-color: #719ECE;
+    animation: pulse 1s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 5px #719ECE;
+    }
+    50% {
+      box-shadow: 0 0 15px #719ECE;
+    }
+    100% {
+      box-shadow: 0 0 5px #719ECE;
+    }
+  }
+  

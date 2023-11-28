@@ -91,3 +91,11 @@ function handleLogout() {
     // Display the login section
     document.querySelector('.login').style.display = 'block';
 }
+
+document.getElementById('username').addEventListener('focus', function(event) {
+    event.target.value = '';
+});
+
+document.getElementById('password').addEventListener('focus', function(event) {
+    event.target.value = '';
+});
