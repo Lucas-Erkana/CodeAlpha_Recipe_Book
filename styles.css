@@ -46,3 +46,43 @@ input.form-control:focus {
     display: inline-block; /* Display as an inline block element */
   }
   
+  /* Styles for the editor section */
+.editor {
+  position: fixed; /* Fixed position to stay on top */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050; /* Higher z-index to be on top of other content */
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px; /* Maximum width */
+}
+
+/* Styles to blur the background */
+.blur-background {
+  filter: blur(5px);
+}
+
+.editor {
+  /* existing styles */
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px; /* Maximum width for larger screens */
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .editor {
+      width: 80%; /* Increase width on smaller screens */
+      max-width: none; /* Remove max-width constraint */
+  }
+
+  .editor {
+    /* existing styles */
+    overflow-y: auto; /* Allows vertical scrolling within the modal */
+    max-height: 90vh; /* Limits the height of the modal to 90% of the viewport height */
+}
+
+}

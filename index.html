@@ -34,8 +34,98 @@
         </div>
     </nav>
     
+    <!-- Modal for Editing -->
+<!-- Bootstrap Modal -->
+<section class="editor" style="display: none;">
+    <p id="successEdit" class="alert alert-success" style="display: none;">Recipe Updated Succesfully</p>
+    <div class="container mt-4">
+        <button type="button" class="btn-close" aria-label="Close" id="closeEditor"></button>
+        <h2 class="text-center">Edit Recipe</h2>
+        <form id="editRecipeForm" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <label for="title" class="col-sm-3 col-form-label">Title</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="title2" name="title2">
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="description" class="col-sm-3 col-form-label">Description</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="description2" name="description2"></textarea>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="ingredients" class="col-sm-3 col-form-label">Ingredients</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="ingredients2" name="ingredients2" ></textarea>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="instructions" class="col-sm-3 col-form-label">Instructions</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="instructions2" name="instructions2" ></textarea>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="prepTime" class="col-sm-3 col-form-label">Preparation Time (in minutes)</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="prepTime2" name="prepTime2">
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="cookTime" class="col-sm-3 col-form-label">Cook Time (in minutes)</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="cookTime2" name="cookTime2">
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="servings" class="col-sm-3 col-form-label">Servings</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="servings2" name="servings2" >
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="cuisine" class="col-sm-3 col-form-label">Cuisine</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="cuisine2" name="cuisine2" >
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label for="course" class="col-sm-3 col-form-label">Course:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="course2" name="cuisine2" >
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="images" class="col-sm-3 col-form-label">Recipe Image</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="images2" name="images2">
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <button type="submit" class="btn btn-primary" id="editRecipeForm">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+    <!-- End modal -->
+
+
     <!-- Recipe section -->
-<section class="Recipe" style="display: none;">
+<section class="Recipe main-content" style="display: none;">
     <div class="container mt-5">
         <h1 class="text-center">Recipes</h1>
         <div class="row mb-4">
@@ -52,7 +142,8 @@
 <div class="alert alert-success" role="alert" id="successMessage" style="display: none;">
     Recipe added successfully!
 </div>
-<section class="Add-Recipe" style="display: none;">
+<!-- Add recipe -->
+<section class="Add-Recipe main-content" style="display: none;">
 
 
     <div class="container mt-4">
@@ -163,9 +254,9 @@
     </div>
     
 </section>
-    <!-- Recipe section Ends -->
+    <!-- ADD Recipe section Ends -->
 <!-- Login section -->
-<section class="login">
+<section class="login main-content">
     <div class="container mt-5">
         <h1 class="text-center">Welcome to RecipeApp</h1>
         <p id="successMessage" class="alert alert-success" style="display: none;"></p>
@@ -244,7 +335,6 @@
   </footer><!-- End Footer -->
   
     <!-- Bootstrap Bundle with Popper -->
-    <script src="index.js"></script>
     <script type="module" src="modules/edit.js"></script>
     <script type="module" src="modules/add-recipe.js"></script>
     <script type="module" src="modules/signup.js"></script>
