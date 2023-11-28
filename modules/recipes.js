@@ -1,7 +1,4 @@
-require('dotenv').config();
-
-const apiUrl = 'https://busy-erin-sneakers.cyclic.app/';
-
+const apiUrl ='https://busy-erin-sneakers.cyclic.app/'
 document.getElementById('searchButton').addEventListener('click', async () => {
     try {
         const searchQuery = document.getElementById('searchBox').value.trim().toLowerCase();
