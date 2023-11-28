@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const apiUrl = 'https://busy-erin-sneakers.cyclic.app/';
 
 document.getElementById('searchButton').addEventListener('click', async () => {

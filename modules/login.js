@@ -1,6 +1,7 @@
-// login.js
+require('dotenv').config();
 
-const apiUrl = "https://busy-erin-sneakers.cyclic.app/";
+// users.js
+const apiUrl = process.env.API_URL;
 
 // Function to display an error message and hide it after a specified time
 function displayErrorMessage(message) {

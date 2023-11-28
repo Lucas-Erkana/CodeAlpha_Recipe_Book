@@ -1,4 +1,7 @@
-const apiUrl = 'https://busy-erin-sneakers.cyclic.app/';
+require('dotenv').config();
+
+// users.js
+const apiUrl = process.env.API_URL;
 
 document.getElementById('signupForm').addEventListener('submit', async function(event) {
     event.preventDefault();

@@ -1,5 +1,8 @@
+require('dotenv').config();
+
 // users.js
-const apiUrl = 'https://busy-erin-sneakers.cyclic.app/';
+const apiUrl = process.env.API_URL;
+
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchUsers();

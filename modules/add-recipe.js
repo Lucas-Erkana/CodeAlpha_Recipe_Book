@@ -1,5 +1,7 @@
-const apiUrl = "https://busy-erin-sneakers.cyclic.app/";
+require('dotenv').config();
 
+// users.js
+const apiUrl = process.env.API_URL;
 // Function to show success message and then hide it after 2 seconds
 function showSuccessMessage() {
   document.getElementById("successMessage").style.display = "block";
