@@ -134,7 +134,7 @@
                 <input type="text" id="searchBox" class="form-control" placeholder="Search for recipes...">
             </div>
             <div class="col-auto">
-                <button id="searchButton" class="btn btn-primary">Search</button>
+                <button id="searchButton" class="btn btn-primary" style="display: none;">Search</button>
             </div>
         </div>
         <div id="recipesContainer"></div>
@@ -347,6 +347,11 @@
             document.getElementById('signInCard').style.display = 'none';
             document.getElementById('signUpCard').style.display = 'block';
         }
+
+        const searchBox = document.getElementById("searchBox");
+  const searchButton = document.getElementById("searchButton");
+  searchBox.value = ""; // Clear the search input
+  searchButton.click(); // Trigger a new search
     </script>
 </body>
 </html>

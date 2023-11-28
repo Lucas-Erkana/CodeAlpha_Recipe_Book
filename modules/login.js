@@ -77,6 +77,7 @@ function updateNavBarWithUsername(username) {
   usernameElement.className = "username"; // Add a class for easy identification
   usernameElement.textContent = username;
   logoutNavItem.insertBefore(usernameElement, logoutNavItem.firstChild);
+  
 }
 
 function handleLogout() {
