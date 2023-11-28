@@ -38,3 +38,11 @@ input.form-control:focus {
     }
   }
   
+
+  span.username {
+    border: 1px solid #333; /* Add a border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding to create some space around the text */
+    display: inline-block; /* Display as an inline block element */
+  }
+  

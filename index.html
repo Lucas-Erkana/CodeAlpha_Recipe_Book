@@ -18,16 +18,17 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="nav nav-tabs" id="myTab" role="tablist" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Recipe</a>
+                    </li>
+                    <li class="nav-item" role="presentation" >
+                        <button class="nav-link active" id="recipeTab" data-bs-toggle="tab" href="#recipe" role="tab" aria-controls="recipe" aria-selected="true">Recipe</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"  id="add-recipeTab" data-bs-toggle="tab" href="#add-recipe" role="tab" aria-controls="add-recipe" aria-selected="false">Add Recipe</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Add Recipe</a>
-                    </li>
-                    <li class="nav-item">
-                        <button id="logoutButton" class="nav-link">Logout</button>
+                        <button id="logoutButton" class="btn btn-danger">Logout</button>
                     </li>
                 </ul>
             </div>
@@ -47,6 +48,120 @@
         </div>
         <div id="recipesContainer"></div>
     </div>
+</section>
+<div class="alert alert-success" role="alert" id="successMessage" style="display: none;">
+    Recipe added successfully!
+</div>
+<section class="Add-Recipe" style="display: none;">
+
+
+    <div class="container mt-4">
+        <h2 class="text-center">Add Recipe</h2>
+        <form id="addRecipeForm" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <label for="title" class="col-sm-3 col-form-label">Title</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="description" class="col-sm-3 col-form-label">Description</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="description" name="description" required></textarea>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="ingredients" class="col-sm-3 col-form-label">Ingredients</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="ingredients" name="ingredients" required></textarea>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="instructions" class="col-sm-3 col-form-label">Instructions</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="instructions" name="instructions" required></textarea>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="prepTime" class="col-sm-3 col-form-label">Preparation Time (in minutes)</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="prepTime" name="prepTime" required>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="cookTime" class="col-sm-3 col-form-label">Cook Time (in minutes)</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="cookTime" name="cookTime" required>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="servings" class="col-sm-3 col-form-label">Servings</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="servings" name="servings" required>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="cuisine" class="col-sm-3 col-form-label">Cuisine</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="cuisine" name="cuisine" required>
+                        <option value="">Select Cuisine</option> <!-- This is the blank default option -->
+                        <option value="African">African</option>
+                        <option value="American">American</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="French">French</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Portuguese">Portuguese</option>
+                        <!-- Add more cuisine options here in alphabetical order -->
+                    </select>
+                    
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="course" class="col-sm-3 col-form-label">Course:</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="course" name="course" required>
+                        <option value="">Select Course</option> 
+                        <option value="Appetizer">Appetizer</option>
+                        <option value="Beverage">Beverage</option>
+                        <option value="Brunch">Brunch</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Entree">Entree</option>
+                        <option value="Hors d'oeuvre">Hors d'oeuvre</option>
+                        <option value="Main">Main</option>
+                        <option value="Salad">Salad</option>
+                        <option value="Side Dish">Side Dish</option>
+                        <option value="Snack">Snack</option>
+                        <option value="Soup">Soup</option>
+                        <!-- Add more course options here in alphabetical order -->
+                    </select>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="images" class="col-sm-3 col-form-label">Recipe Image</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="images" name="images" required>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
 </section>
     <!-- Recipe section Ends -->
 <!-- Login section -->
@@ -129,6 +244,7 @@
   
     <!-- Bootstrap Bundle with Popper -->
     <script src="index.js"></script>
+    <script type="module" src="modules/add-recipe.js"></script>
     <script type="module" src="modules/signup.js"></script>
     <script type="module" src="modules/login.js"></script>
     <script src="modules/recipes.js"></script>
