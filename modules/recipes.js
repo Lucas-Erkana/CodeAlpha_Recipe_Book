@@ -41,11 +41,48 @@ function displayRecipes(recipes, searchQuery) {
                     <p class="card-text">${recipe.description}</p>
                     <p class="card-text"><small class="text-muted">Prep Time: ${recipe.prepTime} mins | Cook Time: ${recipe.cookTime} mins</small></p>
                     <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                    ${isDeleteButtonVisible(recipe.author) ? `<button class="btn btn-danger" data-recipe-id="${recipe._id}">Delete</button>` : ''}
                 </div>
             </div>
         `;
 
         currentRow.appendChild(card);
+    }
+    const deleteButtons = container.querySelectorAll('.btn-danger');
+    deleteButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const recipeId = button.getAttribute('data-recipe-id');
+            // Call a function to handle the delete action with the recipeId
+            handleDeleteRecipe(recipeId);
+        });
+    });
+}
+
+function isDeleteButtonVisible(author) {
+    const loggedInUser = localStorage.getItem('username');
+    return loggedInUser === 'admin' || author === loggedInUser;
+}
+
+// Function to handle the delete action
+async function handleDeleteRecipe(recipeId) {
+    try {
+        const response = await fetch(apiUrl + `recipes/${recipeId}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            // Recipe deleted successfully, you can provide feedback to the user
+            console.log('Recipe deleted successfully');
+            // Refresh the recipe list or perform any other necessary actions
+                        // Refresh the recipe list by triggering a search
+                        const searchBox = document.getElementById('searchBox');
+                        const searchButton = document.getElementById('searchButton');
+                        searchBox.value = ''; // Clear the search input
+                        searchButton.click(); // Trigger a new search
+        } else {
+            throw new Error('Failed to delete recipe');
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
 }

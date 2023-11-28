@@ -12,20 +12,19 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: none;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">RecipeApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="nav nav-tabs" id="myTab" role="tablist" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    </li>
-                    <li class="nav-item" role="presentation" >
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto text-center"> <!-- Center the content -->
+                    <li class="nav-item">
                         <button class="nav-link active" id="recipeTab" data-bs-toggle="tab" href="#recipe" role="tab" aria-controls="recipe" aria-selected="true">Recipe</button>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link"  id="add-recipeTab" data-bs-toggle="tab" href="#add-recipe" role="tab" aria-controls="add-recipe" aria-selected="false">Add Recipe</button>
+                    <li class="nav-item">
+                        <button class="nav-link" id="add-recipeTab" data-bs-toggle="tab" href="#add-recipe" role="tab" aria-controls="add-recipe" aria-selected="false">Add Recipe</button>
                     </li>
                     <li class="nav-item">
                         <button id="logoutButton" class="btn btn-danger">Logout</button>
@@ -34,6 +33,7 @@
             </div>
         </div>
     </nav>
+    
     <!-- Recipe section -->
 <section class="Recipe" style="display: none;">
     <div class="container mt-5">
@@ -245,6 +245,7 @@
   
     <!-- Bootstrap Bundle with Popper -->
     <script src="index.js"></script>
+    <script type="module" src="modules/edit.js"></script>
     <script type="module" src="modules/add-recipe.js"></script>
     <script type="module" src="modules/signup.js"></script>
     <script type="module" src="modules/login.js"></script>
