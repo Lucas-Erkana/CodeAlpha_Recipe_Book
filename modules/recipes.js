@@ -20,8 +20,12 @@ function displayRecipes(recipes, searchQuery) {
   const container = document.getElementById("recipesContainer");
   container.innerHTML = ""; // Clear existing content
 
+    // Filter recipes based on the search query
+    const filteredRecipes = recipes.filter(recipe => 
+      recipe.title.toLowerCase().includes(searchQuery)
+    );
   // Calculate the number of items per row (3 or 4)
-  const itemsPerRow = 4; // You can change this to 3 if you want 3 items per row
+  const itemsPerRow = 3; // You can change this to 3 if you want 3 items per row
 
   // Create rows to group the items
   let currentRow;
@@ -32,7 +36,7 @@ function displayRecipes(recipes, searchQuery) {
       container.appendChild(currentRow);
     }
 
-    const recipe = recipes[i];
+    const recipe = filteredRecipes[i];
     const card = document.createElement("div");
     card.className = "col-md-3 main-content"; // Adjust the column width as needed
     card.innerHTML = `

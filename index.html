@@ -134,7 +134,7 @@
                 <input type="text" id="searchBox" class="form-control" placeholder="Search for recipes...">
             </div>
             <div class="col-auto">
-                <button id="searchButton" class="btn btn-primary" style="display: none;">Search</button>
+                <button id="searchButton" class="btn btn-primary" >Search</button>
             </div>
         </div>
         <div id="recipesContainer"></div>
@@ -325,10 +325,7 @@
       <div class="row">
         <div class="col">
           <div class="copyright">
-            &copy; Copyright <strong><span>Lucas Erkana</span></strong>. All Rights Reserved
-          </div>
-          <div class="credits">
-            Designed by <a href="https://lucaserkana.vercel.app/" class="text-reset" target="_blank">Lucas Erkana</a>
+            &copy; Copyright <strong><span><a href="https://lucaserkana.vercel.app/" class="text-reset" target="_blank">Lucas Erkana</a></span></strong>. All Rights Reserved
           </div>
         </div>
       </div>
@@ -348,10 +345,7 @@
             document.getElementById('signUpCard').style.display = 'block';
         }
 
-        const searchBox = document.getElementById("searchBox");
-  const searchButton = document.getElementById("searchButton");
-  searchBox.value = ""; // Clear the search input
-  searchButton.click(); // Trigger a new search
+
     </script>
 </body>
 </html>
