@@ -88,8 +88,22 @@ input.form-control:focus {
 .editor {
   /* existing styles */
   width: 80%; /* Adjust width as needed */
-  max-width: 600px; /* Maximum width for larger screens */
+  max-width: 700px; /* Maximum width for larger screens */
 }
+.editor {
+  /* existing styles */
+  overflow-y: auto; /* Allows vertical scrolling within the modal */
+  max-height: 90vh; /* Limits the height of the modal to 90% of the viewport height */
+}
+
+#closeEditor {
+  border: 2px solid red; /* Adds a red border */
+  background-color: red; /* Fills the button with red color */
+  color: white!Important; /* Changes the 'X' color to white for better visibility */
+  border-radius: 50%; /* Optional: Makes the button round */
+  padding: 0.25rem 0.5rem; /* Adjust padding as needed */
+}
+
 
 /* Responsive styling for smaller screens */
 @media (max-width: 768px) {
