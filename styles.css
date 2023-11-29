@@ -139,15 +139,17 @@ input.form-control:focus {
 
 .contenter {
   display: flex;
-  width:50%;
+  width:100%;
+  height: auto;
 }
 
 .image {
-  width:80%;
+  width:100%;
+  height: auto;
 }
 
 .data {
-
+  width: 100%;
 }
 
 

@@ -27,12 +27,14 @@ function displayRecipe(recipe) {
 
   container.innerHTML = `
   <div class="modal-content">
+  <h2 style="font-size: 24px; margin-bottom: 10px;">${recipe.title}</h2>
+  <p><strong>Description:</strong> <span style="font-size: 18px;">${
+    recipe.description
+  }</span></p>
   <div class="contenter">
+  
     <div class="image">
-      <h2 style="font-size: 24px; margin-bottom: 10px;">${recipe.title}</h2>
-      <p><strong>Description:</strong> <span style="font-size: 18px;">${
-        recipe.description
-      }</span></p>
+
       <img src="${recipe.images[0]}" class="img-fluid rounded" alt="${recipe.title}">
     </div>
     <div class="data">

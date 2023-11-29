@@ -137,22 +137,24 @@ function displayRecipes(recipes) {
     const card = document.createElement("div");
     card.className = "col-md-3 main-content";
     card.innerHTML = `
-      <div class="card h-100 mb-3 main-content">
-        <img src="${recipe.images[0]}" class="card-img-top recipe-image" alt="${recipe.title}">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">${recipe.title}</h5>
-          <p class="card-text">${recipe.description}</p>
-          <p class="card-text"><small class="text-muted">Prep Time: ${recipe.prepTime} mins | Cook Time: ${recipe.cookTime} mins</small></p>
-          <div class="mt-auto">
-            <button class="btn btn-primary" data-recipe-id="${recipe._id}" id="editButton">Edit</button>
-            ${
-              isDeleteButtonVisible(recipe.author)
-                ? `<button class="btn btn-danger" data-recipe-id="${recipe._id}">Delete</button>`
-                : ""
-            }
-          </div>
-        </div>
+    <div class="card h-100 mb-3 main-content">
+    <img src="${recipe.images[0]}" class="card-img-top recipe-image" alt="${recipe.title}">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">${recipe.title}</h5>
+      <p class="card-text">${recipe.description}</p>
+      <p class="card-text"><small class="text-muted">Prep Time: ${recipe.prepTime} mins | Cook Time: ${recipe.cookTime} mins</small></p>
+      <div class="mt-auto">
+        <button class="btn btn-primary" data-recipe-id="${recipe._id}" id="editButton">Edit</button>
+        ${
+          isDeleteButtonVisible(recipe.author)
+            ? `<button class="btn btn-danger" data-recipe-id="${recipe._id}">Delete</button>`
+            : ""
+        }
+        <button class="btn btn-success" data-recipe-id="${recipe._id}" id="viewRecipe">View Recipe</button>
       </div>
+    </div>
+  </div>
+  
     `;
 
     currentRow.appendChild(card);
