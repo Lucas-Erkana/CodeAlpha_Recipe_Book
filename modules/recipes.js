@@ -16,20 +16,37 @@ document.getElementById("searchButton").addEventListener("click", async () => {
   }
 });
 
+//Display all Recipes
 function displayRecipes(recipes, searchQuery) {
   const container = document.getElementById("recipesContainer");
   container.innerHTML = ""; // Clear existing content
 
-    // Filter recipes based on the search query
-    const filteredRecipes = recipes.filter(recipe => 
-      recipe.title.toLowerCase().includes(searchQuery)
-    );
-  // Calculate the number of items per row (3 or 4)
-  const itemsPerRow = 3; // You can change this to 3 if you want 3 items per row
+  // Filter recipes based on the search query
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.title.toLowerCase().includes(searchQuery)
+  );
+
+  if (filteredRecipes.length === 0) {
+    // Display message and button when no recipes are found
+    container.innerHTML = `
+      <div class="alert alert-info">
+        No recipes found. <button id="addNewRecipe" class="btn btn-primary">Add New Recipe</button>
+      </div>`;
+    document
+      .getElementById("addNewRecipe")
+      .addEventListener("click", function () {
+        document.querySelector(".Recipe").style.display = "none";
+        document.querySelector(".Add-Recipe").style.display = "block";
+      });
+    return;
+  }
+
+  // Calculate the number of items per row
+  const itemsPerRow = 4;
 
   // Create rows to group the items
   let currentRow;
-  for (let i = 0; i < recipes.length; i++) {
+  for (let i = 0; i < filteredRecipes.length; i++) {
     if (i % itemsPerRow === 0) {
       currentRow = document.createElement("div");
       currentRow.className = "row";
@@ -38,37 +55,34 @@ function displayRecipes(recipes, searchQuery) {
 
     const recipe = filteredRecipes[i];
     const card = document.createElement("div");
-    card.className = "col-md-3 main-content"; // Adjust the column width as needed
+    card.className = "col-md-3 main-content";
     card.innerHTML = `
-            <div class="card mb-3 main-content">
-                <img src="${
-                  recipe.images[0]
-                }" class="card-img-top recipe-image" alt="${recipe.title}">
-                <div class="card-body">
-                    <h5 class="card-title">${recipe.title}</h5>
-                    <p class="card-text">${recipe.description}</p>
-                    <p class="card-text"><small class="text-muted">Prep Time: ${
-                      recipe.prepTime
-                    } mins | Cook Time: ${recipe.cookTime} mins</small></p>
-                    <button class="btn btn-primary" data-recipe-id="${
-                      recipe._id
-                    }" id="editButton">Edit</button>
-                    ${
-                      isDeleteButtonVisible(recipe.author)
-                        ? `<button class="btn btn-danger" data-recipe-id="${recipe._id}">Delete</button>`
-                        : ""
-                    }
-                </div>
-            </div>
-        `;
-
+      <div class="card h-100 mb-3 main-content">
+        <img src="${recipe.images[0]}" class="card-img-top recipe-image" alt="${recipe.title}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">${recipe.title}</h5>
+          <p class="card-text">${recipe.description}</p>
+          <p class="card-text"><small class="text-muted">Prep Time: ${recipe.prepTime} mins | Cook Time: ${recipe.cookTime} mins</small></p>
+          <div class="mt-auto">
+            <button class="btn btn-primary" data-recipe-id="${recipe._id}" id="editButton">Edit</button>
+            ${
+              isDeleteButtonVisible(recipe.author)
+                ? `<button class="btn btn-danger" data-recipe-id="${recipe._id}">Delete</button>`
+                : ""
+            }
+          </div>
+        </div>
+      </div>
+    `;
+    
     currentRow.appendChild(card);
   }
+
+  // Add event listeners to delete buttons
   const deleteButtons = container.querySelectorAll(".btn-danger");
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const recipeId = button.getAttribute("data-recipe-id");
-      // Call a function to handle the delete action with the recipeId
       handleDeleteRecipe(recipeId);
     });
   });
@@ -129,18 +143,16 @@ document.body.addEventListener("click", async function (event) {
       document.getElementById("course2").value = recipeData.course;
       document.getElementById("images2").value = recipeData.images[0]; // Assuming it's the first image
 
-
-
       // Show the editor
       const editorSection = document.querySelector(".editor");
       const mainContent = document.querySelector(".main-content");
       editorSection.style.display = "block";
       mainContent.classList.add("blur-background");
       // When opening the modal
-document.querySelector('.main-content').style.overflow = 'hidden';
+      document.querySelector(".main-content").style.overflow = "hidden";
 
-// When closing the modal
-document.querySelector('.main-content').style.overflow = 'auto';
+      // When closing the modal
+      document.querySelector(".main-content").style.overflow = "auto";
 
       //Add listener for update button
       document

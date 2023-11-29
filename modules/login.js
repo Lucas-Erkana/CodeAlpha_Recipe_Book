@@ -124,7 +124,7 @@ async function fetchAndDisplayRecipes() {
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
   container.innerHTML = ""; // Clear existing content
-  const itemsPerRow = 3; // Define the number of items per row
+  const itemsPerRow = 4; // Define the number of items per row
   // Create rows to group the items
   let currentRow;
   for (let i = 0; i < recipes.length; i++) {
@@ -135,29 +135,25 @@ function displayRecipes(recipes) {
     }
     const recipe = recipes[i]; // Correctly define the recipe variable here
     const card = document.createElement("div");
-    card.className = "col-md-3 main-content"; // Adjust the column width as needed
+    card.className = "col-md-3 main-content";
     card.innerHTML = `
-            <div class="card mb-3 main-content">
-                <img src="${
-                  recipe.images[0]
-                }" class="card-img-top recipe-image" alt="${recipe.title}">
-                <div class="card-body">
-                    <h5 class="card-title">${recipe.title}</h5>
-                    <p class="card-text">${recipe.description}</p>
-                    <p class="card-text"><small class="text-muted">Prep Time: ${
-                      recipe.prepTime
-                    } mins | Cook Time: ${recipe.cookTime} mins</small></p>
-                    <button class="btn btn-primary" data-recipe-id="${
-                      recipe._id
-                    }" id="editButton">Edit</button>
-                    ${
-                      isDeleteButtonVisible(recipe.author)
-                        ? `<button class="btn btn-danger" data-recipe-id="${recipe._id}">Delete</button>`
-                        : ""
-                    }
-                </div>
-            </div>
-        `;
+      <div class="card h-100 mb-3 main-content">
+        <img src="${recipe.images[0]}" class="card-img-top recipe-image" alt="${recipe.title}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">${recipe.title}</h5>
+          <p class="card-text">${recipe.description}</p>
+          <p class="card-text"><small class="text-muted">Prep Time: ${recipe.prepTime} mins | Cook Time: ${recipe.cookTime} mins</small></p>
+          <div class="mt-auto">
+            <button class="btn btn-primary" data-recipe-id="${recipe._id}" id="editButton">Edit</button>
+            ${
+              isDeleteButtonVisible(recipe.author)
+                ? `<button class="btn btn-danger" data-recipe-id="${recipe._id}">Delete</button>`
+                : ""
+            }
+          </div>
+        </div>
+      </div>
+    `;
 
     currentRow.appendChild(card);
   }
@@ -199,3 +195,13 @@ async function handleDeleteRecipe(recipeId) {
     console.error("Error:", error);
   }
 }
+
+//Clear the search box and view all the recipes
+document.getElementById("recipeTab").addEventListener("click", async function () {
+  // Clear the search input
+  document.getElementById("searchBox").value = "";
+
+  // Call fetchAndDisplayRecipes function to fetch and display recipes
+  await fetchAndDisplayRecipes();
+});
+

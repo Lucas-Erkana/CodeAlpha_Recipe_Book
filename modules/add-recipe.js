@@ -63,6 +63,7 @@ document
       console.log("Response received: ", data);
       // Show success message and hide it after 2 seconds
       showSuccessMessage();
+      clearFormInputs();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -84,3 +85,17 @@ document.getElementById("recipeTab").addEventListener("click", function () {
   // Show the Recipe section
   document.querySelector(".Recipe").style.display = "block";
 });
+
+
+function clearFormInputs() {
+  document.getElementById("title").value = '';
+  document.getElementById("description").value = '';
+  document.getElementById("ingredients").value = '';
+  document.getElementById("instructions").value = '';
+  document.getElementById("prepTime").value = '';
+  document.getElementById("cookTime").value = '';
+  document.getElementById("servings").value = '';
+  document.getElementById("cuisine").value = '';
+  document.getElementById("course").value = '';
+  document.getElementById("images").value = '';
+}
