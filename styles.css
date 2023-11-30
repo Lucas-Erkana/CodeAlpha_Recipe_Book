@@ -92,7 +92,7 @@ input.form-control:focus {
   max-height: 90vh; /* Limits the height of the modal to 90% of the viewport height */
 }
 
-#closeEditor {
+#closeEditor, #closeEditor2 {
   border: 2px solid red; /* Adds a red border */
   background-color: red; /* Fills the button with red color */
   color: white!Important; /* Changes the 'X' color to white for better visibility */

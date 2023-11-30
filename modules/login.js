@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Sign in function
 async function handleSignIn(event) {
   event.preventDefault();
 
@@ -42,7 +43,7 @@ async function handleSignIn(event) {
     displayErrorMessage("An error occurred. Please try again later.");
   }
 }
-
+//authentication function
 async function authenticateUser(username, password) {
   try {
     const response = await fetch(apiUrl + "users");
@@ -121,7 +122,7 @@ async function fetchAndDisplayRecipes() {
     console.error('Error fetching recipes:', error);
   }
 }
-
+//display recipes function
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
   container.innerHTML = ""; // Clear existing content
@@ -200,6 +201,122 @@ async function handleDeleteRecipe(recipeId) {
   }
 }
 
+//Functionality for editing on modal
+document.body.addEventListener("click", async function (event) {
+  if (
+    event.target.matches(".btn.btn-primary") &&
+    event.target.hasAttribute("data-recipe-id")
+  ) {
+    const recipeId = event.target.getAttribute("data-recipe-id");
+    try {
+      const response = await fetch(apiUrl + "recipes/" + recipeId);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const recipeData = await response.json();
+
+      // Populate the form with recipe data
+      document.getElementById("title2").value = recipeData.title;
+      document.getElementById("description2").value = recipeData.description;
+      document.getElementById("ingredients2").value = recipeData.ingredients;
+      document.getElementById("instructions2").value = recipeData.instructions;
+      document.getElementById("prepTime2").value = recipeData.prepTime;
+      document.getElementById("cookTime2").value = recipeData.cookTime;
+      document.getElementById("servings2").value = recipeData.servings;
+      document.getElementById("cuisine2").value = recipeData.cuisine;
+      document.getElementById("course2").value = recipeData.course;
+      document.getElementById("images2").value = recipeData.images[0]; // Assuming it's the first image
+
+      // Show the editor
+      const editorSection = document.querySelector(".editor");
+      const mainContent = document.querySelector(".main-content");
+      editorSection.style.display = "block";
+      mainContent.classList.add("blur-background");
+      // When opening the modal
+      document.querySelector(".main-content").style.overflow = "hidden";
+
+      // When closing the modal
+      document.querySelector(".main-content").style.overflow = "auto";
+
+      //Add listener for update button
+      document
+        .getElementById("editRecipeForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          // Gather form data
+          const formData = {
+            title: document.getElementById("title2").value,
+            description: document.getElementById("description2").value,
+            ingredients: document.getElementById("ingredients2").value,
+            instructions: document.getElementById("instructions2").value,
+            prepTime: document.getElementById("prepTime2").value,
+            cookTime: document.getElementById("cookTime2").value,
+            servings: document.getElementById("servings2").value,
+            cuisine: document.getElementById("cuisine2").value,
+            course: document.getElementById("course2").value,
+            images: [document.getElementById("images2").value],
+          };
+
+          try {
+            const updateResponse = await fetch(apiUrl + "recipes/" + recipeId, {
+              method: "PUT", // or 'PATCH' depending on your API
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            if (!updateResponse.ok) {
+              throw new Error("Failed to update recipe");
+            }
+
+            // Display success message
+            const successMessage = document.getElementById("successEdit");
+            successMessage.style.display = "block";
+            setTimeout(() => {
+              successMessage.style.display = "none";
+            }, 3000); // Hide after 3 seconds
+          } catch (error) {
+            console.error("Error updating recipe:", error);
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching recipe data:", error);
+    }
+  }
+});
+
+//close functionality
+document.getElementById("closeEditor").addEventListener("click", function () {
+  const editorSection = document.querySelector(".editor");
+  const bodyContent = document.querySelector(".main-content"); // Select the body or main content wrapper
+  const viewerSection = document.querySelector(".viewer");
+  // Hide the editor
+  editorSection.style.display = "none";
+//Hide the viewer
+viewerSection.style.display = "none";
+  // Remove blur from the background content
+  bodyContent.classList.remove("blur-background");
+  const searchBox = document.getElementById("searchBox");
+  const searchButton = document.getElementById("searchButton");
+  searchBox.value = ""; // Clear the search input
+  searchButton.click(); // Trigger a new search
+});
+document.getElementById("closeEditor2").addEventListener("click", function () {
+  const editorSection = document.querySelector(".editor");
+  const bodyContent = document.querySelector(".main-content"); // Select the body or main content wrapper
+
+  // Hide the editor
+  editorSection.style.display = "none";
+
+  // Remove blur from the background content
+  bodyContent.classList.remove("blur-background");
+  const searchBox = document.getElementById("searchBox");
+  const searchButton = document.getElementById("searchButton");
+  searchBox.value = ""; // Clear the search input
+  searchButton.click(); // Trigger a new search
+});
 //Clear the search box and view all the recipes
 document.getElementById("recipeTab").addEventListener("click", async function () {
   // Clear the search input
@@ -228,18 +345,3 @@ document.body.addEventListener('click', async function(event) {
   }
 });
 
-document.getElementById("closeEditor").addEventListener("click", function () {
-  const editorSection = document.querySelector(".editor");
-  const bodyContent = document.querySelector(".main-content"); // Select the body or main content wrapper
-  const viewerSection = document.querySelector(".viewer");
-  // Hide the editor
-  editorSection.style.display = "none";
-//Hide the viewer
-viewerSection.style.display = "none";
-  // Remove blur from the background content
-  bodyContent.classList.remove("blur-background");
-  const searchBox = document.getElementById("searchBox");
-  const searchButton = document.getElementById("searchButton");
-  searchBox.value = ""; // Clear the search input
-  searchButton.click(); // Trigger a new search
-});
