@@ -1,5 +1,4 @@
 const apiUrl = "https://busy-erin-sneakers.cyclic.app/";
-const test = "6564e0a1c0052d3433688304";
 
 export async function viewSingleRecipe(recipeId) {
   try {
@@ -9,14 +8,14 @@ export async function viewSingleRecipe(recipeId) {
     }
     const recipe = await response.json();
 
-    displayRecipe(recipe);
+    viewRecipe(recipe);
     toggler();
   } catch (error) {
     console.error("Error:", error);
   }
 }
 
-export function displayRecipe(recipe) {
+export function viewRecipe(recipe) {
   const container = document.getElementById("recipeDetails");
   const formattedDate = new Date(recipe.dateCreated).toLocaleDateString(
     "en-US"
@@ -27,8 +26,8 @@ export function displayRecipe(recipe) {
 
   container.innerHTML = `
   <div class="modal-content">
-  <h2 style="font-size: 24px; margin-bottom: 10px;">${recipe.title}</h2>
-  <p><strong>Description:</strong> <span style="font-size: 18px;">${
+  <h2 style="margin-bottom: 10px;">${recipe.title}</h2>
+  <p><strong>Description:</strong> <span>${
     recipe.description
   }</span></p>
   <div class="contenter">
@@ -38,29 +37,29 @@ export function displayRecipe(recipe) {
       <img src="${recipe.images[0]}" class="img-fluid rounded" alt="${recipe.title}">
     </div>
     <div class="data">
-      <h4 id="ingredientsHeader" style="font-size: 20px; margin-top: 20px;">Ingredients <span class="toggle-btn" id="toggler">▼</span></h4>
-      <ul id="ingredients" style="list-style-type: disc; font-size: 18px; margin-left: 20px; display: none";>
+      <h4 id="ingredientsHeader">Ingredients <span class="toggle-btn" id="toggler">▼</span></h4>
+      <ul id="ingredients" style="list-style-type: disc; display: none";>
         ${recipe.ingredients
           .map((ingredient) => `<li>${ingredient}</li>`)
           .join("")}
       </ul>
      
-      <h4 style="font-size: 20px; margin-top: 20px;">Instructions <span class="toggle-btn" onclick="toggle-btn" id="toggler2">▼</span></h4>
-      <ol id="instructions" style="list-style-type: decimal; font-size: 18px; margin-left: 20px; display: none";>
+      <h4>Instructions <span class="toggle-btn" onclick="toggle-btn" id="toggler2">▼</span></h4>
+      <ol id="instructions" style="list-style-type: decimal; display: none";>
         ${instructions.map((step) => `<li>${step.trim()}.</li>`).join("")}
       </ol>
       
-      <p style="font-size: 18px;"><strong>Preparation Time:</strong> ${
+      <p ><strong>Preparation Time:</strong> ${
         recipe.prepTime
       } minutes</p>
-      <p style="font-size: 18px;"><strong>Cooking Time:</strong> ${
+      <p><strong>Cooking Time:</strong> ${
         recipe.cookTime
       } minutes</p>
-      <p style="font-size: 18px;"><strong>Servings:</strong> ${
+      <p ><strong>Servings:</strong> ${
         recipe.servings
       }</p>
-      <p style="font-size: 18px;"><strong>Author:</strong> ${recipe.author}</p>
-      <p style="font-size: 18px;"><strong>Date Created:</strong> ${formattedDate}</p>
+      <p ><strong>Author:</strong> ${recipe.author}</p>
+      <p><strong>Date Created:</strong> ${formattedDate}</p>
     </div>
   </div>
 </div>
@@ -70,9 +69,6 @@ export function displayRecipe(recipe) {
     `;
 }
 
-// Fetch and display the recipe with ID 'test'
-viewSingleRecipe(test);
-// Get a reference to the header and content elements for Ingredients
 export function toggler() {
   const ingredientsHeader = document.getElementById("ingredientsHeader");
   const ingredientsContent = document.getElementById("ingredients");

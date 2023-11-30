@@ -11,14 +11,14 @@ document.getElementById("searchButton").addEventListener("click", async () => {
       throw new Error("Network response was not ok");
     }
     const recipes = await response.json();
-    displayRecipes(recipes, searchQuery);
+    displayRecipesSingle(recipes, searchQuery);
   } catch (error) {
     console.error("Error:", error);
   }
 });
 
 //Display all Recipes
-function displayRecipes(recipes, searchQuery) {
+function displayRecipesSingle(recipes, searchQuery) {
   const container = document.getElementById("recipesContainer");
   container.innerHTML = ""; // Clear existing content
 
