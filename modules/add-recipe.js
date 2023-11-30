@@ -11,15 +11,14 @@ function showSuccessMessage() {
   }, 2000); // 2000 milliseconds (2 seconds)
 }
 
-document
-  .getElementById("addRecipeForm")
-  .addEventListener("submit", async function (event) {
+document.getElementById("addRecipeForm").addEventListener("submit", async function (event) {
     event.preventDefault();
-
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     // Split ingredients by comma and trim each one
-    const ingredients = document.getElementById("ingredients").value.split(",").map((ingredient) => ingredient.trim());
+    const ingredientsElement = document.getElementById("ingredients");
+    const ingredients = ingredientsElement ? ingredientsElement.value.split(",").map(ingredient => ingredient.trim()) : [];
+    
     const instructions = document.getElementById("instructions").value;
     const prepTime = document.getElementById("prepTime").value;
     const cookTime = document.getElementById("cookTime").value;
