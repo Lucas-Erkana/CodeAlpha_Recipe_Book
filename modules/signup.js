@@ -14,11 +14,10 @@ document.getElementById('signupForm').addEventListener('submit', async function(
         let valid = true;
     
         if (!email.includes('@')) {
-            showError('emailError', 'Invalid email');
+            showError('Invalid email');
             valid = false;
         }
         if (password.length < 7) {
-            showError('passwordError', 'Password must be at least 7 characters');
             valid = false;
         }
     
@@ -28,9 +27,10 @@ document.getElementById('signupForm').addEventListener('submit', async function(
 
     // Validate data
     if (!validateForm(email, password)) {
+        showError('Password must be at least 7 characters or more');
         return; // Stop the function if validation fails
     }
-
+else{
     try {
         // Post data
         const response = await fetch(apiUrl + 'users', {
@@ -61,7 +61,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
     } catch (error) {
         console.error('Error:', error);
     }
-    
+}
 });
 
 function showSuccessMessage(email) {
@@ -79,3 +79,15 @@ function showElement(elementId) {
     const element = document.getElementById(elementId);
     element.style.display = 'block';
 }
+
+function showError(errorMessage) {
+    const errorElement = document.getElementById('passwordError');
+    errorElement.textContent = errorMessage; // Use textContent for plain text
+    errorElement.style.display = 'block'; // Make sure the element is visible
+  
+    // Hide the error message after 2 seconds (2000 milliseconds)
+    setTimeout(function() {
+      errorElement.style.display = 'none';
+    }, 2000);
+  }
+  

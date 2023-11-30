@@ -271,3 +271,14 @@ input.form-control:focus {
       margin-left: 10px;
     }
     
+
+    #passwordError {
+      color: white; /* Text color */
+      background-color: red; /* Background color */
+      border: 1px solid darkred; /* Border color */
+      padding: 10px; /* Some padding for spacing */
+      margin: 10px 0; /* Margin for spacing */
+      border-radius: 5px; /* Optional: rounded corners */
+      display: none; /* Initially hidden */
+    }
+    
