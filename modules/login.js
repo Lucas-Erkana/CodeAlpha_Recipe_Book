@@ -6,6 +6,7 @@ function displayErrorMessage(message) {
   const errorMessageElement = document.getElementById("errorMessage");
   errorMessageElement.textContent = message;
   errorMessageElement.style.display = "block";
+  document.querySelector("nav").style.display = "none";
 
   setTimeout(function () {
     errorMessageElement.style.display = "none";
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function handleSignIn(event) {
   event.preventDefault();
 
-  const username = document.getElementById("username").value;
+  const username = document.getElementById("username").value.toLowerCase();
   const password = document.getElementById("password").value;
 
   try {
@@ -38,6 +39,7 @@ async function handleSignIn(event) {
       updateNavBarWithUsername(user.username);
     } else {
       displayErrorMessage("Invalid username or password.");
+      
     }
   } catch (error) {
     displayErrorMessage("An error occurred. Please try again later.");
