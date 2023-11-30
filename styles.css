@@ -1,17 +1,13 @@
 html, body {
   height: 100%;
   margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 .recipe-image {
     width: 100%; /* Makes the image responsive */
     height: 100px; /* Fixed height */
     object-fit: cover; /* Ensures the image covers the area without stretching */
-}
-
-
-body {
-    font-family: 'Roboto', sans-serif;
 }
 
 footer {
@@ -66,7 +62,7 @@ input.form-control:focus {
   }
   
   /* Styles for the editor section */
-.editor {
+.editor, .viewer {
   position: fixed; /* Fixed position to stay on top */
   top: 50%;
   left: 50%;
@@ -85,12 +81,12 @@ input.form-control:focus {
   filter: blur(5px);
 }
 
-.editor {
+.editor , .viewer{
   /* existing styles */
   width: 80%; /* Adjust width as needed */
   max-width: 700px; /* Maximum width for larger screens */
 }
-.editor {
+.editor, .viewer {
   /* existing styles */
   overflow-y: auto; /* Allows vertical scrolling within the modal */
   max-height: 90vh; /* Limits the height of the modal to 90% of the viewport height */
@@ -104,6 +100,12 @@ input.form-control:focus {
   padding: 0.25rem 0.5rem; /* Adjust padding as needed */
 }
 
+/* Viewer settings */
+
+
+
+
+/* Viewer styling */
 
 /* Responsive styling for smaller screens */
 @media (max-width: 768px) {

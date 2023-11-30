@@ -1,7 +1,7 @@
 const apiUrl = "https://busy-erin-sneakers.cyclic.app/";
 const test = "6564e0a1c0052d3433688304";
 
-async function viewSingleRecipe(recipeId) {
+export async function viewSingleRecipe(recipeId) {
   try {
     const response = await fetch(`${apiUrl}recipes/${recipeId}`);
     if (!response.ok) {
@@ -16,7 +16,7 @@ async function viewSingleRecipe(recipeId) {
   }
 }
 
-function displayRecipe(recipe) {
+export function displayRecipe(recipe) {
   const container = document.getElementById("recipeDetails");
   const formattedDate = new Date(recipe.dateCreated).toLocaleDateString(
     "en-US"
@@ -73,7 +73,7 @@ function displayRecipe(recipe) {
 // Fetch and display the recipe with ID 'test'
 viewSingleRecipe(test);
 // Get a reference to the header and content elements for Ingredients
-function toggler() {
+export function toggler() {
   const ingredientsHeader = document.getElementById("ingredientsHeader");
   const ingredientsContent = document.getElementById("ingredients");
   const ingredientsToggle = document.getElementById("toggler");

@@ -35,7 +35,17 @@
         </div>
     </nav>
     
+<!-- Modal for viewing -->
 
+<div class="container2 mt-4 viewer" style="display: none;">
+    <button type="button" class="btn-close" aria-label="Close" id="closeEditor" style="float: right; filter: hue-rotate(0deg) brightness(0.8);"></button>
+    <div id="recipeDetails" class="mt-5">
+        <!-- Recipe details will be inserted here by JavaScript -->
+    </div>
+</div>
+
+
+<!-- End of Modal for viewing -->
 <!-- Modal for Editing -->
 <section class="editor" style="display: none;">
     <p id="successEdit" class="alert alert-success" style="display: none;">Recipe Updated Succesfully</p>
@@ -331,6 +341,7 @@
   </footer><!-- End Footer -->
   
     <!-- Bootstrap Bundle with Popper -->
+    
     <script type="module" src="modules/edit.js"></script>
     <script type="module" src="modules/add-recipe.js"></script>
     <script type="module" src="modules/signup.js"></script>

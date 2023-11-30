@@ -1,3 +1,4 @@
+import { viewSingleRecipe, displayRecipe,toggler } from "./viewsingle.js";
 const apiUrl ='https://busy-erin-sneakers.cyclic.app/'
 
 // Function to display an error message and hide it after a specified time
@@ -107,7 +108,7 @@ document.getElementById("username").addEventListener("focus", function (event) {
 document.getElementById("password").addEventListener("focus", function (event) {
   event.target.value = "";
 });
-
+//fetch Display for Recipes
 async function fetchAndDisplayRecipes() {
   try {
     const response = await fetch(apiUrl + 'recipes');
@@ -144,13 +145,14 @@ function displayRecipes(recipes) {
       <p class="card-text">${recipe.description}</p>
       <p class="card-text"><small class="text-muted">Prep Time: ${recipe.prepTime} mins | Cook Time: ${recipe.cookTime} mins</small></p>
       <div class="mt-auto">
+      <button class="btn btn-success" data-recipe-id="${recipe._id}" id="viewRecipe">View Recipe</button>
         <button class="btn btn-primary" data-recipe-id="${recipe._id}" id="editButton">Edit</button>
         ${
           isDeleteButtonVisible(recipe.author)
             ? `<button class="btn btn-danger" data-recipe-id="${recipe._id}">Delete</button>`
             : ""
         }
-        <button class="btn btn-success" data-recipe-id="${recipe._id}" id="viewRecipe">View Recipe</button>
+     
       </div>
     </div>
   </div>
@@ -207,3 +209,37 @@ document.getElementById("recipeTab").addEventListener("click", async function ()
   await fetchAndDisplayRecipes();
 });
 
+// functionality for viewing recipe
+document.body.addEventListener('click', async function(event) {
+  if (event.target.matches('.btn.btn-success') && event.target.hasAttribute('data-recipe-id')) {
+    const recipeId = event.target.getAttribute('data-recipe-id');
+    await viewSingleRecipe(recipeId);
+    const mainContent = document.querySelector(".main-content");
+
+    mainContent.classList.add("blur-background");
+    // When opening the modal
+    document.querySelector(".main-content").style.overflow = "hidden";
+
+    // When closing the modal
+    document.querySelector(".main-content").style.overflow = "auto";
+
+    // Make the container visible
+    document.querySelector('.container2.mt-4.viewer').style.display = 'block';
+  }
+});
+
+document.getElementById("closeEditor").addEventListener("click", function () {
+  const editorSection = document.querySelector(".editor");
+  const bodyContent = document.querySelector(".main-content"); // Select the body or main content wrapper
+  const viewerSection = document.querySelector(".viewer");
+  // Hide the editor
+  editorSection.style.display = "none";
+//Hide the viewer
+viewerSection.style.display = "none";
+  // Remove blur from the background content
+  bodyContent.classList.remove("blur-background");
+  const searchBox = document.getElementById("searchBox");
+  const searchButton = document.getElementById("searchButton");
+  searchBox.value = ""; // Clear the search input
+  searchButton.click(); // Trigger a new search
+});
